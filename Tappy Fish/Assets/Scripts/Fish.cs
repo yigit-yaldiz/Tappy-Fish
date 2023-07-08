@@ -24,8 +24,6 @@ public class Fish : MonoBehaviour
     Animator _animator;
     AudioSource _swimSound;
 
-    ParticleController _particleController;
-
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -34,7 +32,6 @@ public class Fish : MonoBehaviour
 
         _animator = GetComponent<Animator>();
         _swimSound = GetComponent<AudioSource>();
-        _particleController = GetComponent<ParticleController>();
     }
 
     void Update()
@@ -72,6 +69,7 @@ public class Fish : MonoBehaviour
         if (collision.CompareTag("Obstacle"))
         {
             Score.Instance.IncreaseScore();
+            collision.GetComponent<LeftMovement>().PlayScoreParticleEffect();
             _scoreSound.Play();
         }
         else if (collision.CompareTag("Column") && !GameManager.Instance.IsGameOver)

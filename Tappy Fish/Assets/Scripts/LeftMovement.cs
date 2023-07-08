@@ -5,9 +5,15 @@ using UnityEngine;
 public class LeftMovement : MonoBehaviour
 {
     [SerializeField] float _speed;
+    ParticleSystem _particle;
     BoxCollider2D _box;
     float _groundWidth;
     float obstacleWidth;
+
+    private void Awake()
+    {
+        _particle = GetComponentInChildren<ParticleSystem>();
+    }
 
     void Start()
     {
@@ -43,5 +49,10 @@ public class LeftMovement : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    public void PlayScoreParticleEffect()
+    {
+        _particle.Play();
     }
 }
